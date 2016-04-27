@@ -162,11 +162,11 @@ class MovieDetailViewController: UIViewController, UIPopoverPresentationControll
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showVideo"
         {
-            if let youtubeViewController = segue.destinationViewController as? YoutubeViewController
+            if let videoViewController = segue.destinationViewController as? VideoViewController
             {
-                youtubeViewController.movieVideo = videos
-                youtubeViewController.popoverPresentationController!.delegate = self
-                youtubeViewController.preferredContentSize = CGSize(width: 320, height: 186)
+                videoViewController.movieVideo = videos
+                videoViewController.popoverPresentationController!.delegate = self
+                videoViewController.preferredContentSize = CGSize(width: 320, height: 186)
             }
             
         }

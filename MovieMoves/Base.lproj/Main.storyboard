@@ -165,7 +165,7 @@
         <!--Movie Video-->
         <scene sceneID="GL3-id-hNo">
             <objects>
-                <viewController title="Movie Video" id="jOL-jU-Miu" customClass="YoutubeViewController" customModule="MovieMoves" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Movie Video" id="jOL-jU-Miu" customClass="VideoViewController" customModule="MovieMoves" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WCS-b3-Dz4"/>
                         <viewControllerLayoutGuide type="bottom" id="2KC-mM-PMe"/>
