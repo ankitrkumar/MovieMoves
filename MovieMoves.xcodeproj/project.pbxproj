@@ -12,7 +12,7 @@
 		EF6D9C281CCEA2F1001E7957 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D9C271CCEA2F1001E7957 /* FavoritesViewController.swift */; };
 		EF6D9C2A1CCEAABF001E7957 /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D9C291CCEAABF001E7957 /* WatchlistViewController.swift */; };
 		EF6D9C2C1CCEB45F001E7957 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D9C2B1CCEB45F001E7957 /* MoviesViewController.swift */; };
-		EF6D9C2E1CD12438001E7957 /* YoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D9C2D1CD12438001E7957 /* YoutubeViewController.swift */; };
+		EF6D9C2E1CD12438001E7957 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D9C2D1CD12438001E7957 /* VideoViewController.swift */; };
 		EF6D9C321CD128EE001E7957 /* TMDBMovieVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D9C311CD128EE001E7957 /* TMDBMovieVideo.swift */; };
 		EFBC98031CCB46AE0017BF8E /* TMDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC97FF1CCB46AE0017BF8E /* TMDBClient.swift */; };
 		EFBC98041CCB46AE0017BF8E /* TMDBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBC98001CCB46AE0017BF8E /* TMDBConstants.swift */; };
@@ -44,7 +44,7 @@
 		EF6D9C271CCEA2F1001E7957 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		EF6D9C291CCEAABF001E7957 /* WatchlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
 		EF6D9C2B1CCEB45F001E7957 /* MoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
-		EF6D9C2D1CD12438001E7957 /* YoutubeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeViewController.swift; sourceTree = "<group>"; };
+		EF6D9C2D1CD12438001E7957 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		EF6D9C311CD128EE001E7957 /* TMDBMovieVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBMovieVideo.swift; sourceTree = "<group>"; };
 		EFBC97FF1CCB46AE0017BF8E /* TMDBClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBClient.swift; sourceTree = "<group>"; };
 		EFBC98001CCB46AE0017BF8E /* TMDBConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBConstants.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 				EFBC98091CCBE2E50017BF8E /* AuthViewController.swift */,
 				EF5873601CCD5DB80041C2D0 /* MovieDetailViewController.swift */,
 				EF6D9C2B1CCEB45F001E7957 /* MoviesViewController.swift */,
-				EF6D9C2D1CD12438001E7957 /* YoutubeViewController.swift */,
+				EF6D9C2D1CD12438001E7957 /* VideoViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -262,7 +262,7 @@
 				EFBC98081CCBDF660017BF8E /* TMDBConvenience.swift in Sources */,
 				EF6D9C2A1CCEAABF001E7957 /* WatchlistViewController.swift in Sources */,
 				EF6D9C281CCEA2F1001E7957 /* FavoritesViewController.swift in Sources */,
-				EF6D9C2E1CD12438001E7957 /* YoutubeViewController.swift in Sources */,
+				EF6D9C2E1CD12438001E7957 /* VideoViewController.swift in Sources */,
 				EF6D9C2C1CCEB45F001E7957 /* MoviesViewController.swift in Sources */,
 				EF5873611CCD5DB80041C2D0 /* MovieDetailViewController.swift in Sources */,
 				EFBC98051CCB46AE0017BF8E /* TMDBConfig.swift in Sources */,

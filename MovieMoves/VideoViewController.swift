@@ -8,7 +8,8 @@
 
 import UIKit
 
-class YoutubeViewController: UIViewController {
+// MARK: - VideoViewController: UIViewController
+class VideoViewController: UIViewController {
 
     var movieVideo : [TMDBMovieVideo]!
     
