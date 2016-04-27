@@ -15,6 +15,7 @@ struct TMDBMovie {
     let title: String
     let id: Int
     let posterPath: String?
+    let tagline: String?
     let releaseYear: String?
     let overview: String?
     let vote_average: Double?
@@ -35,6 +36,8 @@ struct TMDBMovie {
         
         overview = dictionary[TMDBClient.JSONResponseKeys.MovieOverview] as? String
         vote_average = dictionary[TMDBClient.JSONResponseKeys.MovieVoteAverage] as? Double
+        tagline = dictionary[TMDBClient.JSONResponseKeys.MovieTagline] as? String
+        
     }
     
     static func moviesFromResults(results: [[String:AnyObject]]) -> [TMDBMovie] {

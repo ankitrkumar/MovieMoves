@@ -164,7 +164,7 @@ class MovieDetailViewController: UIViewController, UIPopoverPresentationControll
         {
             if let youtubeViewController = segue.destinationViewController as? YoutubeViewController
             {
-                youtubeViewController.movieVideo = videos![0]
+                youtubeViewController.movieVideo = videos
                 youtubeViewController.popoverPresentationController!.delegate = self
                 youtubeViewController.preferredContentSize = CGSize(width: 320, height: 186)
             }
@@ -208,6 +208,7 @@ class MovieDetailViewController: UIViewController, UIPopoverPresentationControll
             }
         }))
         
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
         
         self.presentViewController(alert, animated: true, completion:nil)
     }
