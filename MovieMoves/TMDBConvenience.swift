@@ -14,14 +14,14 @@ import Foundation
 extension TMDBClient {
     
     // MARK: Authentication (GET) Methods
-    /*
-        Steps for Authentication...
-        https://www.themoviedb.org/documentation/api/sessions
+    //
+//        Steps for Authentication...
+//        https://www.themoviedb.org/documentation/api/sessions
+//    
+//        Step 1: Create a new request token
+//        Step 2a: Ask the user for permission via the website
+//        Step 3: Create a session ID
     
-        Step 1: Create a new request token
-        Step 2a: Ask the user for permission via the website
-        Step 3: Create a session ID
-    */
     func authenticateWithViewController(hostViewController: UIViewController, completionHandlerForAuth: (success: Bool, errorString: String?) -> Void) {
         
         // chain completion handlers for each request so that they run one after the other
@@ -69,13 +69,13 @@ extension TMDBClient {
     
     private func getRequestToken(completionHandlerForToken: (success: Bool, requestToken: String?, errorString: String?) -> Void) {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [String:AnyObject]()
         
-        /* 2. Make the request */
+        // 2. Make the request  
         taskForGETMethod(Methods.AuthenticationTokenNew, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 print(error)
                 completionHandlerForToken(success: false, requestToken: nil, errorString: "Login Failed (Request Token).")
@@ -90,7 +90,7 @@ extension TMDBClient {
         }
     }
     
-    /* This function opens a AuthViewController to handle Step 2a of the auth flow */
+    // This function opens a AuthViewController to handle Step 2a of the auth flow  
     private func loginWithToken(requestToken: String?, hostViewController: UIViewController, completionHandlerForLogin: (success: Bool, errorString: String?) -> Void) {
         
         let authorizationURL = NSURL(string: "\(TMDBClient.Constants.AuthorizationURL)\(requestToken!)")
@@ -110,13 +110,13 @@ extension TMDBClient {
     
     private func getSessionID(requestToken: String?, completionHandlerForSession: (success: Bool, sessionID: String?, errorString: String?) -> Void) {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [TMDBClient.ParameterKeys.RequestToken: requestToken!]
         
-        /* 2. Make the request */
+        // 2. Make the request  
         taskForGETMethod(Methods.AuthenticationSessionNew, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 print(error)
                 completionHandlerForSession(success: false, sessionID: nil, errorString: "Login Failed (Session ID).")
@@ -133,13 +133,13 @@ extension TMDBClient {
     
     private func getUserID(completionHandlerForUserID: (success: Bool, userID: Int?, errorString: String?) -> Void) {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [TMDBClient.ParameterKeys.SessionID: TMDBClient.sharedInstance().sessionID!]
         
-        /* 2. Make the request */
+        // 2. Make the request  
         taskForGETMethod(Methods.Account, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 print(error)
                 completionHandlerForUserID(success: false, userID: nil, errorString: "Login Failed (User ID).")
@@ -158,15 +158,15 @@ extension TMDBClient {
     
     func getFavoriteMovies(completionHandlerForFavMovies: (result: [TMDBMovie]?, error: NSError?) -> Void) {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [TMDBClient.ParameterKeys.SessionID: TMDBClient.sharedInstance().sessionID!]
         var mutableMethod: String = Methods.AccountIDFavoriteMovies
         mutableMethod = subtituteKeyInMethod(mutableMethod, key: TMDBClient.URLKeys.UserID, value: String(TMDBClient.sharedInstance().userID!))!
         
-        /* 2. Make the request */
+        // 2. Make the request  
         taskForGETMethod(mutableMethod, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 completionHandlerForFavMovies(result: nil, error: error)
             } else {
@@ -184,15 +184,15 @@ extension TMDBClient {
 
     func getWatchlistMovies(completionHandlerForWatchlist: (result: [TMDBMovie]?, error: NSError?) -> Void) {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [TMDBClient.ParameterKeys.SessionID: TMDBClient.sharedInstance().sessionID!]
         var mutableMethod: String = Methods.AccountIDWatchlistMovies
         mutableMethod = subtituteKeyInMethod(mutableMethod, key: TMDBClient.URLKeys.UserID, value: String(TMDBClient.sharedInstance().userID!))!
         
-        /* 2. Make the request */
+        // 2. Make the request  
         taskForGETMethod(mutableMethod, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 completionHandlerForWatchlist(result: nil, error: error)
             } else {
@@ -210,13 +210,13 @@ extension TMDBClient {
     
     func getMoviesForSearchString(searchString: String, completionHandlerForMovies: (result: [TMDBMovie]?, error: NSError?) -> Void) -> NSURLSessionDataTask? {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [TMDBClient.ParameterKeys.Query: searchString]
         
-        /* 2. Make the request */
+        // 2. Make the request  
         let task = taskForGETMethod(Methods.SearchMovie, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 completionHandlerForMovies(result: nil, error: error)
             } else {
@@ -236,13 +236,13 @@ extension TMDBClient {
     
     func getPublicMovies(method:String, completionHandlerForMovies: (result: [TMDBMovie]?, error: NSError?) -> Void) -> NSURLSessionDataTask? {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [TMDBClient.ParameterKeys.Page: "1"]
         
-        /* 2. Make the request */
+        // 2. Make the request  
         let task = taskForGETMethod(method, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 completionHandlerForMovies(result: nil, error: error)
             } else {
@@ -262,16 +262,16 @@ extension TMDBClient {
     
     func getMovieVideos(id: Int, completionHandlerForMovieVideos: (result: [TMDBMovieVideo]?, error: NSError?) -> Void) -> NSURLSessionDataTask? {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [String:AnyObject]()
         
         var mutableMethod: String = Methods.Videos
         mutableMethod = subtituteKeyInMethod(mutableMethod, key: TMDBClient.URLKeys.UserID, value:String(id))!
         
-        /* 2. Make the request */
+        // 2. Make the request  
         let task = taskForGETMethod(mutableMethod, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 completionHandlerForMovieVideos(result: nil, error: error)
             } else {
@@ -291,13 +291,13 @@ extension TMDBClient {
     
     func getConfig(completionHandlerForConfig: (didSucceed: Bool, error: NSError?) -> Void) {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [String:AnyObject]()
         
-        /* 2. Make the request */
+        // 2. Make the request  
         taskForGETMethod(Methods.Config, parameters: parameters) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 completionHandlerForConfig(didSucceed: false, error: error)
             } else if let newConfig = TMDBConfig(dictionary: results as! [String:AnyObject]) {
@@ -315,16 +315,16 @@ extension TMDBClient {
     
     func postToFavorites(movie: TMDBMovie, favorite: Bool, completionHandlerForFavorite: (result: Int?, error: NSError?) -> Void)  {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [TMDBClient.ParameterKeys.SessionID : TMDBClient.sharedInstance().sessionID!]
         var mutableMethod: String = Methods.AccountIDFavorite
         mutableMethod = subtituteKeyInMethod(mutableMethod, key: TMDBClient.URLKeys.UserID, value: String(TMDBClient.sharedInstance().userID!))!
         let jsonBody = "{\"\(TMDBClient.JSONBodyKeys.MediaType)\": \"movie\",\"\(TMDBClient.JSONBodyKeys.MediaID)\": \"\(movie.id)\",\"\(TMDBClient.JSONBodyKeys.Favorite)\": \(favorite)}"
     
-        /* 2. Make the request */
+        // 2. Make the request  
         taskForPOSTMethod(mutableMethod, parameters: parameters, jsonBody: jsonBody) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 completionHandlerForFavorite(result: nil, error: error)
             } else {
@@ -339,16 +339,16 @@ extension TMDBClient {
     
     func postToWatchlist(movie: TMDBMovie, watchlist: Bool, completionHandlerForWatchlist: (result: Int?, error: NSError?) -> Void) {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [TMDBClient.ParameterKeys.SessionID : TMDBClient.sharedInstance().sessionID!]
         var mutableMethod: String = Methods.AccountIDWatchlist
         mutableMethod = subtituteKeyInMethod(mutableMethod, key: TMDBClient.URLKeys.UserID, value: String(TMDBClient.sharedInstance().userID!))!
         let jsonBody = "{\"\(TMDBClient.JSONBodyKeys.MediaType)\": \"movie\",\"\(TMDBClient.JSONBodyKeys.MediaID)\": \"\(movie.id)\",\"\(TMDBClient.JSONBodyKeys.Watchlist)\": \(watchlist)}"
         
-        /* 2. Make the request */
+        // 2. Make the request  
         taskForPOSTMethod(mutableMethod, parameters: parameters, jsonBody: jsonBody) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 completionHandlerForWatchlist(result: nil, error: error)
             } else {
@@ -363,16 +363,16 @@ extension TMDBClient {
     
     func postMovieRating(movie: TMDBMovie, ratingValue: Double, completionHandlerForMovieRating: (result: Int?, error: NSError?) -> Void) {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        // 1. Specify parameters, method (if has {key}), and HTTP body (if POST)  
         let parameters = [TMDBClient.ParameterKeys.SessionID : TMDBClient.sharedInstance().sessionID!]
         var mutableMethod: String = Methods.PostMovieRating
         mutableMethod = subtituteKeyInMethod(mutableMethod, key: TMDBClient.JSONResponseKeys.MovieID, value: String (movie.id))!
         let jsonBody = "{\n\"value\": \(ratingValue)\n}"
         
-        /* 2. Make the request */
+        // 2. Make the request  
         taskForPOSTMethod(mutableMethod, parameters: parameters, jsonBody: jsonBody) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
+            // 3. Send the desired value(s) to completion handler  
             if let error = error {
                 completionHandlerForMovieRating(result: nil, error: error)
             } else {

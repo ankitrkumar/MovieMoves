@@ -57,12 +57,12 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        /* Get cell type */
+        // Get cell type  
         let cellReuseIdentifier = "FavoriteTableViewCell"
         let movie = movies[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         
-        /* Set cell defaults */
+        // Set cell defaults  
         cell.textLabel!.text = movie.title
         cell.textLabel?.font = UIFont.boldSystemFontOfSize(18.0)
         cell.imageView!.image = UIImage(named: "Film")
