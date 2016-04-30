@@ -90,7 +90,7 @@ extension TMDBClient {
         }
     }
     
-    // This function opens a AuthViewController to handle Step 2a of the auth flow  
+    // This function opens a AuthViewController to handle Step 2a of the auth flow					
     private func loginWithToken(requestToken: String?, hostViewController: UIViewController, completionHandlerForLogin: (success: Bool, errorString: String?) -> Void) {
         
         let authorizationURL = NSURL(string: "\(TMDBClient.Constants.AuthorizationURL)\(requestToken!)")

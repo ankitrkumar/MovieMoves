@@ -137,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Account" id="AKW-xj-XNW"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="List" id="AKW-xj-XNW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BAm-id-Jyg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -270,7 +270,7 @@
                             <constraint firstItem="EN9-Ky-Vxj" firstAttribute="top" secondItem="Sjw-Rw-WRn" secondAttribute="bottom" id="zRP-0F-Ej8"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" image="Favorite" id="L09-ZQ-Eig"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="List" id="L09-ZQ-Eig"/>
                     <connections>
                         <outlet property="movieSearchBar" destination="EN9-Ky-Vxj" id="EcO-P4-e9G"/>
                         <outlet property="movieTableView" destination="YiH-Qq-mad" id="BAu-uZ-aZD"/>
@@ -436,7 +436,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="71N-KK-wX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="asN-XN-Kgl"/>
             </objects>
-            <point key="canvasLocation" x="-56" y="423"/>
+            <point key="canvasLocation" x="-108" y="423"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="jI3-dy-isS">
@@ -477,7 +477,7 @@
                             <constraint firstAttribute="trailing" secondItem="SfC-rJ-xzT" secondAttribute="trailing" id="h4k-cl-mtG"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="Favorite" id="H1N-sm-Ta1"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="List" id="H1N-sm-Ta1"/>
                     <connections>
                         <outlet property="moviesTableView" destination="SfC-rJ-xzT" id="bik-6I-eiP"/>
                     </connections>
@@ -525,7 +525,7 @@
                             <constraint firstItem="kf9-tF-nrx" firstAttribute="leading" secondItem="WGx-qW-pNt" secondAttribute="leading" id="mtE-Zp-u9Q"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Watchlist" image="List" id="PIh-Sh-fXE"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Watchlist" image="List" id="PIh-Sh-fXE"/>
                     <connections>
                         <outlet property="moviesTableView" destination="kf9-tF-nrx" id="F5O-Tu-EHG"/>
                     </connections>
@@ -600,7 +600,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Favorite" width="261" height="184"/>
         <image name="List" width="32" height="32"/>
     </resources>
 </document>
