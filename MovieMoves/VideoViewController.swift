@@ -24,6 +24,8 @@ class VideoViewController: UIViewController {
         let frame = 0
         let randomTrailer = Int(arc4random_uniform(UInt32(movieVideo.count)))
         webView.allowsInlineMediaPlayback = true
+        webView.mediaPlaybackRequiresUserAction = false
+        webView.mediaPlaybackAllowsAirPlay = true	
         let code:NSString = "<iframe width=\(width) height= \(height) src=\(movieVideo[randomTrailer].url!) frameborder=\(frame) allowfullscreen></iframe>"
         self.webView.loadHTMLString(code as String, baseURL: nil)
     }

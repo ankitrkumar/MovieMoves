@@ -6,6 +6,7 @@
 //  Copyright © 2016 Ankit Kumar. All rights reserved.
 //
 import UIKit
+import Cosmos
 
 // MARK: - MovieDetailViewController: UIViewController
 
@@ -26,7 +27,7 @@ class MovieDetailViewController: UIViewController, UIPopoverPresentationControll
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieReleaseYearLabel: UILabel!
-    @IBOutlet weak var movieRatingLabel: UILabel!
+    @IBOutlet weak var movieRating: CosmosView!
     @IBOutlet weak var movieOverviewTextView: UITextView!
     @IBOutlet weak var watchTrailer: UIButton!
     
@@ -34,11 +35,9 @@ class MovieDetailViewController: UIViewController, UIPopoverPresentationControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        movieRating.didFinishTouchingCosmos = ratingTouched
+        movieRating.didTouchCosmos = ratingTouches
         navigationController!.navigationBar.translucent = false
-        self.movieRatingLabel.userInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: "ratingLabelTouched")
-        tapGesture.numberOfTapsRequired = 1
-        self.movieRatingLabel.addGestureRecognizer(tapGesture)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -61,9 +60,10 @@ class MovieDetailViewController: UIViewController, UIPopoverPresentationControll
                 self.movieTitleLabel.text = movie.title
             }
             if let rating = movie.vote_average {
-                self.movieRatingLabel.text = "\(rating)/10.0"
+                self.movieRating.rating = rating
+                self.movieRating.text = "\(rating)/10"
             } else {
-                self.movieRatingLabel.text = "N/A"
+                self.movieRating.rating = 0
             }
             
             if let overview = movie.overview{
@@ -135,7 +135,7 @@ class MovieDetailViewController: UIViewController, UIPopoverPresentationControll
             }
         }
         
-        
+        // get the trailer videos
         TMDBClient.sharedInstance().getMovieVideos(self.movie!.id) { (videos, error) in
             if let videos = videos {
                 self.videos = videos
@@ -176,41 +176,28 @@ class MovieDetailViewController: UIViewController, UIPopoverPresentationControll
         return .None
     }
     
+    // MARK: Functions
+    
+    private func ratingTouched(rating: Double)
+    {
+        TMDBClient.sharedInstance().postMovieRating(self.movie!, ratingValue: rating) { (statusCode, error) in
+            if let error = error {
+                print(error)
+            } else {
+            }
+        }
+    }
+    
+    private func ratingTouches(rating: Double)
+    {
+        self.movieRating.rating = rating
+        self.movieRating.text = "\(rating)/10"
+    }
+    
     // MARK: Actions
     
     @IBAction func watchTrailer(sender: UIButton) {
         self.performSegueWithIdentifier("showVideo", sender: self)
-    }
-    
-    func ratingLabelTouched()
-    {
-        var ratingTextField : UITextField!
-        var rating : Double?
-        if let vote = movie!.vote_average {
-            rating = vote
-        } else {
-            rating = 0.0
-        }
-        let alert = UIAlertController(title: "Rate this movie!", message: "Enter a rating for this movie!", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
-            textField.placeholder = "\(self.movie!.vote_average!)"
-            textField.keyboardType = UIKeyboardType.DecimalPad
-            ratingTextField = textField
-        }
-        
-        alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: { (alert: UIAlertAction!) -> Void in
-            rating = Double(ratingTextField.text!)
-            TMDBClient.sharedInstance().postMovieRating(self.movie!, ratingValue: rating!) { (statusCode, error) in
-                if let error = error {
-                    print(error)
-                } else {
-                }
-            }
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-        
-        self.presentViewController(alert, animated: true, completion:nil)
     }
     
     @IBAction func toggleFavorite(sender: AnyObject) {

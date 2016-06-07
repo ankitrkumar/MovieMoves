@@ -15,6 +15,7 @@ class MoviesViewController: UIViewController {
     // MARK: Properties
     
     var movies: [TMDBMovie] = [TMDBMovie]()
+    var segmentIndex = TMDBClient.Methods.Popular   //changed Now
     
     // MARK: Outlets
     
@@ -33,7 +34,7 @@ class MoviesViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        TMDBClient.sharedInstance().getPublicMovies(TMDBClient.Methods.Popular) { (movies, error) in
+        TMDBClient.sharedInstance().getPublicMovies(segmentIndex) { (movies, error) in  //changed Now
             if let movies = movies {
                 self.movies = movies
                 dispatch_async(dispatch_get_main_queue()) {
@@ -60,6 +61,7 @@ class MoviesViewController: UIViewController {
                     print(error)
                 }
             }
+            segmentIndex = TMDBClient.Methods.Popular       //changed Now
 
         case 1:
             TMDBClient.sharedInstance().getPublicMovies(TMDBClient.Methods.NowPlaying) { (movies, error) in
@@ -72,7 +74,8 @@ class MoviesViewController: UIViewController {
                     print(error)
                 }
             }
-
+            segmentIndex = TMDBClient.Methods.NowPlaying        //changed Now
+            
         case 2:
             TMDBClient.sharedInstance().getPublicMovies(TMDBClient.Methods.Upcoming) { (movies, error) in
                 if let movies = movies {
@@ -84,7 +87,8 @@ class MoviesViewController: UIViewController {
                     print(error)
                 }
             }
-
+            segmentIndex = TMDBClient.Methods.Upcoming      //changed Now
+            
         default:
             TMDBClient.sharedInstance().getPublicMovies(TMDBClient.Methods.Popular) { (movies, error) in
                 if let movies = movies {
